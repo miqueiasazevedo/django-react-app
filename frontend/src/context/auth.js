@@ -1,12 +1,14 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import api from "../services/api";
+import { useAxios } from "../hooks/UseAxios";
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setloading] = useState(false);
+
+
+  const {response, loading, error, fetchData} = useAxios();
 
   useEffect(() => {
     const storageUser = localStorage.getItem('@App:user');
@@ -18,26 +20,26 @@ export const AuthProvider = ({ children }) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (response?.access) {
+      setUser(JSON.parse(atob(response.access.split(".")[1])))
+      api.defaults.headers.common['Authorization'] = `Bearer ${response.access}`;
+      localStorage.setItem('@App:user', atob(response.access.split(".")[1]));
+      localStorage.setItem('@App:token', response.access);
+    }
+  }, [response])
+
 
   const Login = (loginData) => {
 
-    setloading(true);
-    api
-      .post("/api/customtoken/", loginData)
-      .then((response) => {
-      
-        setUser(JSON.parse(atob(response.data.access.split(".")[1])))
-        api.defaults.headers.common['Authorization'] = `Bearer ${response.data.access}`;
-        localStorage.setItem('@App:user', atob(response.data.access.split(".")[1]));
-        localStorage.setItem('@App:token', response.data.access);
-
-        console.log(response.data);
-        setloading(false);
-      })
-      .catch((error) => {
-        setError(error.response.data.detail);
-        setloading(false);
-      }).then(setloading(false));
+    fetchData({
+      url: '/api/customtoken/',
+      method: 'POST',
+      data: {
+        username: loginData.username,
+        password: loginData.password
+      }
+    })
   
   }
 

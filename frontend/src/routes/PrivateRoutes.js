@@ -7,10 +7,10 @@ import Page404 from "../pages/Page404";
 function PrivateRoutes() {
   return (
     <BrowserRouter>
-      <Redirect from='login' to='home' />
+      <Redirect exact from='/login' to='home' />
       <Switch>
         <Route path='/home' component={Home} />
-        <Route path='*' component={Page404} />
+        <Route path='/*' component={Page404} />
       </Switch>
     </BrowserRouter>
   );

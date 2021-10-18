@@ -11,13 +11,12 @@ function Login() {
     password: "",
   });
 
+  const { Login, loading, error } = useAuth();
+
   function handleLogin(e) {
     e.preventDefault();
     Login(loginData);
-    
   }
-
-  const { Login, loading, error } = useAuth();
 
   return (
     <div className={styles.containerLogin}>

@@ -7,7 +7,7 @@ import Page404 from "../pages/Page404";
 const SignRoutes = () => {
   return (
     <BrowserRouter>
-      <Redirect from='/' to='login' />
+      <Redirect exact from='/' to='login' />
       <Switch>
         <Route path='/login' component={Login} />
         <Route path='*' component={Page404} />
