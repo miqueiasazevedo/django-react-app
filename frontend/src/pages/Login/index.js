@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 
 import ListPelada from "../../components/ListPelada";
 import { useAuth } from "../../context/auth";
@@ -47,7 +47,7 @@ function Login() {
         />
         <button>Log In</button>
         {loading && <p className={styles.notification}>Loading...</p>}
-        {!loading && error && <p className={styles.error}>{error}</p>}
+        {!loading && error && <p className={styles.error}>{ JSON.parse(error.request.response).detail }</p>}
         { <ListPelada /> }
       </form>
     </div>

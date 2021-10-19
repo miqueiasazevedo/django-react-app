@@ -7,14 +7,16 @@ export const useAxios = (axiosParams={}) => {
   const [loading, setLoading] = useState(true);
 
   const fetchData = async (params) => {
+    setLoading(true)
     try {
       const result = await api.request(params);
       setResponse(result.data);
-      } catch( error ) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
+      setError('')
+    } catch( error ) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
