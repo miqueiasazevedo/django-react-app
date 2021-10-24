@@ -51,8 +51,8 @@ function Login() {
           {...password}
         />
         <button>Log In</button>
-        {loading && <p className={styles.notification}>Loading...</p>}
-        {!loading && error && <p className={styles.error}>{ JSON.parse(error.request.response).detail }</p>}
+        {loading && <p className={styles.formNotification}>Loading...</p>}
+        {!loading && error && <small className={styles.notificationError}>{ JSON.parse(error.request.response).detail }</small>}
         { <ListPelada /> }
       </form>
     </div>

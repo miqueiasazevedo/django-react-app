@@ -16,6 +16,7 @@ const Input = ({
     <>
       {label && <label htmlFor={id}>{label}</label>}
       <input
+        className={error && styles.error}
         type={type}
         id={id}
         name={id}
@@ -25,7 +26,7 @@ const Input = ({
         placeholder={placeholder}
         {...props}
       />
-      {error && <small className={styles.error}>{error}</small>}
+      {error && <small className={styles.alert, styles.alertError}>{error}</small>}
     </>
   );
 };

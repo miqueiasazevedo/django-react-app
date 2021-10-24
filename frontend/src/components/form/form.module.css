@@ -6,20 +6,25 @@ input{
   padding: .5rem 1rem;
   margin: 1rem 0;
   border-radius: 5px;
-  border: 2px solid cornflowerblue;
+  border: 2px solid transparent;
 }
 
 label + input{
   margin-top: 0;
 }
 
-input + .error{
+input + .alertError{
   margin: -.75rem 0 .5rem;
 }
 
 input:focus{
   outline: none;
-  border: 2px solid tomato;
+  border: 2px solid cornflowerblue;
+}
+
+input.error{
+  border-color: rgb(139, 43, 43);
+  box-shadow: 0 0 10px rgb(139, 43, 43);
 }
 
 button{
@@ -37,7 +42,10 @@ button{
   text-align: center;
 }
 
-.error{ 
+.alert{
   font-weight: lighter;
+}
+
+.alertError{ 
   color: rgb(139, 43, 43);
 }

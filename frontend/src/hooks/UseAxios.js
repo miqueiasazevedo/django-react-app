@@ -4,7 +4,7 @@ import api from '../services/api'
 export const useAxios = (axiosParams={}) => {
   const [response, setResponse] = useState(undefined);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async (params) => {
     setLoading(true)
